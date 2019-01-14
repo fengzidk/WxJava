@@ -5,6 +5,7 @@ import java.io.InputStream;
 import java.io.Serializable;
 import java.nio.charset.StandardCharsets;
 
+import me.chanjar.weixin.common.util.xml.XStreamEnumConverter;
 import org.apache.commons.io.IOUtils;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
@@ -35,8 +36,8 @@ public class WxOpenXmlMessage implements Serializable {
   private Long createTime;
 
   @XStreamAlias("InfoType")
-  @XStreamConverter(value = XStreamCDataConverter.class)
-  private String infoType;
+  @XStreamConverter(value = XStreamEnumConverter.class)
+  private WxOpenInfoType infoType;
 
   @XStreamAlias("ComponentVerifyTicket")
   @XStreamConverter(value = XStreamCDataConverter.class)
@@ -56,6 +57,7 @@ public class WxOpenXmlMessage implements Serializable {
   @XStreamAlias("PreAuthCode")
   @XStreamConverter(value = XStreamCDataConverter.class)
   private String preAuthCode;
+
 
   public static String wxMpOutXmlMessageToEncryptedXml(WxMpXmlOutMessage message, WxOpenConfigStorage wxOpenConfigStorage) {
     String plainXml = message.toXml();
